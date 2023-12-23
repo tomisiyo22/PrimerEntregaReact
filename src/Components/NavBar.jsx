@@ -1,5 +1,7 @@
 import React from 'react';
 import CartWidget from './CartWidget';
+import { Link } from 'react-router-dom'
+
 
 
 const NavBar = () => {
@@ -10,12 +12,19 @@ const NavBar = () => {
    BicimaniaXTREMME
   </button>
   <ul className="dropdown-menu">
-    <li><a className="dropdown-item" href="#">Nosotros</a></li>
-    <li><a className="dropdown-item" href="#">Más productos</a></li>
-    <li><a className="dropdown-item" href="#">¿Dónde estamos ubicados?</a></li>
+    <li><Link className="dropdown-item" to='/'>Nosotros</Link></li>
+    <li><Link className="dropdown-item" to={'/'}>Bicicletas</Link> </li>
+    <li><Link className="dropdown-item" to={'/categoria/bicimontagne'}>Mountain Bikes</Link></li>
+    <li><Link className="dropdown-item" to={'/categoria/urbanbike'}>Urban Bikes</Link></li>
+    <li><Link className="dropdown-item" to={'/categoria/fitness'}>Fitness Bikes</Link></li>
+    <li><Link className="dropdown-item" to=''>¿Dónde estamos ubicados?</Link></li>
   </ul>
 </div>
-           <h1 className="text-center mt-5">¡BICIMANIA XTREMME!</h1> 
+            <Link to={'/'}>
+<h1 className="text-center mt-5">¡BICIMANIA XTREMME!</h1>
+            </Link>
+          
+         
            <CartWidget />
         </>
     );
