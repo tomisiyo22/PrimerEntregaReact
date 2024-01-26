@@ -1,39 +1,37 @@
-import React, { useState } from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react'
+import Swal from 'sweetalert2'
+import { useContext } from 'react'
+import { CartContext } from '../context/ShoppingCartContext'
+const ItemCount = ({ producto }) => {
 
-const ItemCount = () => {
-    const [contador, setContador] = useState(0);
 
-    const mostrarMensaje = ()=> {
-        if(contador === 1) {
-            alert(`Agregado al carrito ${contador} unidad`)
-        } else
-        alert(`Agregado al carrito ${contador} unidades`)
-    } 
-
-    const incrementarContador = () => {
-        if(contador <=9) {
-        setContador(contador + 1);
-    }};
-
-    const decrementarContador = () => {
-        if(contador >= 1) {
-        setContador(contador - 1);
-    }};
-
+    const { sumar, restar, contador, agregarAlCarrito } = useContext(CartContext);
+  
+    const mostrarMensaje = () => {
+      if (contador === 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No puedes agregar 0 productos al carrito.',
+        });
+      } else {
+        Swal.fire(`Has agregado al carrito ${contador} unidades`);
+        agregarAlCarrito(producto, contador);
+      }
+    };
+  
     return (
-        <div>
-            <Button colorScheme='teal' size='xs' onClick={incrementarContador}>
-                +
-            </Button>
-            <Button colorScheme='teal' size='xs' onClick={mostrarMensaje}>
-                Agregar al carrito {contador}
-            </Button>
-            <Button colorScheme='teal' size='xs' onClick={decrementarContador}>
-                -
-            </Button>
-        </div>
+      <div className='centradoBtn'>
+        <Button colorScheme='teal' size='xs' mr='4' onClick={restar}>
+          -
+        </Button>
+        <Button onClick={mostrarMensaje}>Agregar al carrito {contador}</Button>
+        <Button colorScheme='teal' size='xs' ml='4' onClick={sumar}>
+          +
+        </Button>
+      </div>
     );
-};
-
-export default ItemCount;
+  };
+  
+  export default ItemCount;
+  
